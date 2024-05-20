@@ -6,29 +6,41 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 21:12:00 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/05/12 22:58:28 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/05/20 03:24:13 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	handler(int sigid)
+void	decode_message(int sigid)
 {
-	if (sigid == SIGUSR1)
-		write(1, "0", 1);
+	static char	c = 0;
+	static int	bits = 0;
+
 	if (sigid == SIGUSR2)
-		write(1, "1", 1);
+		c = c | 1;
+	bits++;
+	if (bits == 8)
+	{
+		if (c == 0)
+			ft_putchar_fd('\n', STDOUT_FILENO);
+		ft_putchar_fd(c, STDOUT_FILENO);
+		bits = 0;
+		c = 0;
+	}
+	c = c << 1;
 }
 
 int	main(void)
 {
-	pid_t	pid;
+	pid_t	server_pid;
 
-	pid = getpid();
-	printf("Server PID : %d\n\n", pid);
-	printf("Receiving messages...\n");
-	signal(SIGUSR1, &handler); // exit on error
-	signal(SIGUSR2, &handler);
+	server_pid = getpid();
+	ft_putstr_fd("Server PID : ", STDOUT_FILENO);
+	ft_putnbr_fd(server_pid, STDOUT_FILENO);
+	ft_putstr_fd("\nWaiting for messages ... \n\n", STDOUT_FILENO);
+	signal(SIGUSR1, &decode_message);
+	signal(SIGUSR2, &decode_message);
 	while (1)
 		pause();
 	return (EXIT_SUCCESS);

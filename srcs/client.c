@@ -6,49 +6,45 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 21:12:08 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/05/12 22:55:46 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/05/20 03:23:46 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	ft_put_error(char *str)
+void	send_message(int server_pid, char *str)
 {
-	printf("%s\n", str);
-	exit(EXIT_FAILURE);
-}
+	int	bits;
+	int	bit;
 
-int	ft_isdigit(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	else
-		return (0);
+	while (*str)
+	{
+		bits = 8;
+		while (bits-- > 0)
+		{
+			bit = (*str >> bits) & 1;
+			if (bit == 0)
+				kill(server_pid, SIGUSR1);
+			else
+				kill(server_pid, SIGUSR2);
+			usleep(150);
+		}
+		str++;
+	}
 }
 
 int	main(int argc, char **argv)
 {
-	int 	idx;
-	pid_t	pid;
+	pid_t	server_pid;
 
-	idx = 0;
 	if (argc < 3)
-		ft_put_error("Missing arguments");
-	while (argv[1][idx])
-		if (!ft_isdigit(argv[1][idx++]))
-			ft_put_error("Invalid PID");
+		ft_puterror("Missing arguments.\n");
 	if (argc > 3)
-		ft_put_error("Too many arguments");
-	pid = atoi(argv[1]);
-	idx = 0;
-	while (argv[2][idx])
-	{
-		if (argv[2][idx] == ' ')
-			kill(pid, SIGUSR1);
-		else
-			kill(pid, SIGUSR2);
-		usleep(150);
-		idx++;
-	}
+		ft_puterror("Too many arguments.\n");
+	if (!ft_isnumber(argv[1]))
+		ft_puterror("Invalid PID.\n");
+	server_pid = ft_atoi(argv[1]);
+	send_message(server_pid, argv[2]);
+	send_break(server_pid);
 	return (EXIT_SUCCESS);
 }
