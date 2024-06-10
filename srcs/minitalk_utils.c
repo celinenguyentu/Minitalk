@@ -6,7 +6,7 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 20:46:08 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/05/20 03:28:17 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/06/10 05:18:08 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ void	send_break(int pid)
 	while (bits-- > 0)
 	{
 		kill(pid, SIGUSR1);
-		usleep(150);
+		usleep(200);
 	}
 }

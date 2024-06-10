@@ -6,7 +6,7 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 21:12:08 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/05/20 03:43:28 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/06/10 05:19:28 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	send_message(int server_pid, char *str)
 				kill(server_pid, SIGUSR1);
 			else
 				kill(server_pid, SIGUSR2);
-			usleep(150);
+			usleep(200);
 		}
 		str++;
 	}
@@ -35,7 +35,7 @@ void	send_message(int server_pid, char *str)
 	while (bits-- > 0)
 	{
 		kill(server_pid, SIGUSR1);
-		usleep(150);
+		usleep(200);
 	}
 }
 
@@ -56,7 +56,7 @@ void	send_client_pid(int server_pid, int client_pid)
 			kill(server_pid, SIGUSR1);
 		else
 			kill(server_pid, SIGUSR2);
-		usleep(150);
+		usleep(200);
 	}
 }
 

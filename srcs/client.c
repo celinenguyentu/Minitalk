@@ -6,7 +6,7 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 21:12:08 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/05/20 03:23:46 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/06/10 05:12:30 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	send_message(int server_pid, char *str)
 				kill(server_pid, SIGUSR1);
 			else
 				kill(server_pid, SIGUSR2);
-			usleep(150);
+			usleep(210);
 		}
 		str++;
 	}
