@@ -6,7 +6,7 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 21:12:00 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/06/20 03:14:21 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/06/20 03:53:09 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	decode_data(t_exchange *info)
 
 int	main(void)
 {
-	t_exchange			info;
+	t_exchange	info;
 
 	ft_bzero(&info, sizeof(t_exchange));
 	ft_printf("Server PID : %d\nWaiting for messages ...\n\n", getpid());

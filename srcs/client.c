@@ -6,7 +6,7 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 21:12:08 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/06/20 03:15:56 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/06/20 03:49:52 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	acknowledgement(int signal, siginfo_t *info, void *context)
 
 int	main(int argc, char **argv)
 {
-	pid_t				server_pid;
+	pid_t	server_pid;
 
 	if (argc < 3)
 		ft_puterror("Error: Missing arguments.", 1);
