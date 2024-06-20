@@ -4,7 +4,7 @@ SERVER_NAME		=	server
 CLIENT_NAME		=	client
 
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -g3
 RM				=	rm
 RM_FLAGS		=	-rf
 
@@ -50,7 +50,9 @@ clean:
 
 fclean:		clean
 			@make -C >/dev/null $(LIBFT_PATH) fclean
+			@echo "Removed libft.a"
 			@$(RM) $(RM_FLAGS) $(SERVER_NAME) $(CLIENT_NAME)
+			@echo "Removed binaries server and client."
 
 re:			fclean all
 
