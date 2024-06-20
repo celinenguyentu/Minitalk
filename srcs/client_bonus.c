@@ -6,7 +6,7 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 21:12:08 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/06/20 04:02:47 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/06/20 19:35:07 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,18 @@ void	send_signal(int server_pid, int signal)
 
 void	send_data(int server_pid, char *str)
 {
-	int		bits;
-	size_t	idx;
+	int				bits;
+	size_t			idx;
+	unsigned char	c;
 
 	idx = 0;
 	while (str[idx])
 	{
+		c = (unsigned char)str[idx];
 		bits = 8;
 		while (bits-- > 0)
 		{
-			if (((str[idx] >> bits) & 1) == 0)
+			if (((c >> bits) & 1) == 0)
 				send_signal(server_pid, SIGUSR1);
 			else
 				send_signal(server_pid, SIGUSR2);

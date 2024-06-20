@@ -6,7 +6,7 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 21:12:00 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/06/20 04:02:53 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/06/20 19:33:38 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ int	alloc_data(t_exchange *info)
 
 int	decode_data(t_exchange *info)
 {
-	char	c;
-	int		bits;
-	int		timer;
+	unsigned char	c;
+	int				bits;
+	int				timer;
 
 	while (info->idx < info->length + 1)
 	{
@@ -83,7 +83,7 @@ int	decode_data(t_exchange *info)
 			c = (c << 1) | (g_signal < 0);
 			g_signal = 0;
 		}
-		info->data[info->idx++] = c;
+		((unsigned char *)info->data)[info->idx++] = c;
 	}
 	return (0);
 }

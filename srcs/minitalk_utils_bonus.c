@@ -6,7 +6,7 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 20:46:08 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/06/20 04:02:41 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/06/20 19:46:07 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	set_signal_handler(void (*handler)(int, siginfo_t *, void *))
 	ft_bzero(&ac, sizeof(struct sigaction));
 	ac.sa_sigaction = handler;
 	sigemptyset(&ac.sa_mask);
+	sigaddset(&ac.sa_mask, SIGUSR1);
+	sigaddset(&ac.sa_mask, SIGUSR2);
 	ac.sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR1, &ac, NULL) < 0 || sigaction(SIGUSR2, &ac, NULL) < 0)
 		ft_puterror("Error: Handler setup failed.", 0);
