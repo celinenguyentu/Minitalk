@@ -6,11 +6,11 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 21:12:00 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/06/20 03:53:03 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/06/20 04:02:53 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 volatile sig_atomic_t	g_signal;
 

@@ -6,7 +6,7 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 21:12:08 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/06/20 03:49:52 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/06/20 03:57:36 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	send_signal(int server_pid, int signal)
 	g_acknowledgement = 0;
 }
 
-void	send_message(int server_pid, char *str)
+void	send_data(int server_pid, char *str)
 {
 	int	bits;
 
@@ -91,6 +91,6 @@ int	main(int argc, char **argv)
 		ft_puterror("Error: Invalid PID.", 1);
 	set_signal_handler(acknowledgement);
 	send_length(server_pid, argv[2]);
-	send_message(server_pid, argv[2]);
+	send_data(server_pid, argv[2]);
 	return (EXIT_SUCCESS);
 }

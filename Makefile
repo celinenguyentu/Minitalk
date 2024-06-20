@@ -12,8 +12,8 @@ HFILES_DIR		=	./includes/
 
 CLIENT_SRC		=	./srcs/minitalk_utils.c ./srcs/client.c
 SERVER_SRC		=	./srcs/minitalk_utils.c ./srcs/server.c
-CLIENT_SRC_B	=	./srcs/minitalk_utils.c ./srcs/client_bonus.c
-SERVER_SRC_B	=	./srcs/minitalk_utils.c ./srcs/server_bonus.c
+CLIENT_SRC_B	=	./srcs/minitalk_utils_bonus.c ./srcs/client_bonus.c
+SERVER_SRC_B	=	./srcs/minitalk_utils_bonus.c ./srcs/server_bonus.c
 
 CLIENT_OBJS		=	$(CLIENT_SRC:.c=.o)
 SERVER_OBJS		=	$(SERVER_SRC:.c=.o)
