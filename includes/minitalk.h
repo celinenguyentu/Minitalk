@@ -6,7 +6,7 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 21:48:11 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/06/20 03:18:31 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/06/20 20:20:55 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/types.h>
+
+# ifndef _POSIX_C_SOURCE
+#  define _POSIX_C_SOURCE 199309L
+# endif
 
 # define SIGERR 1
 # define PIDERR 2

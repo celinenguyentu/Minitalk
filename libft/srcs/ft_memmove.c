@@ -6,28 +6,51 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 16:41:46 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/06/16 17:14:10 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:28:56 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+#if defined(__arm__)
+
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
 	if (!dst && !src)
 		return (NULL);
 	if (dst < src)
-		dst = ft_memcpy(dst, src, len);
+		dst = ft_memcpy(dst, src, n);
 	else
 	{
-		while (len > 0)
+		while (n > 0)
 		{
-			((unsigned char *)dst)[len - 1] = ((unsigned char *)src)[len - 1];
-			len--;
+			((unsigned char *)dst)[n - 1] = ((unsigned char *)src)[n - 1];
+			n--;
 		}
 	}
 	return (dst);
 }
+
+#else
+
+void	*ft_memmove(void *dst, const void *src, size_t n)
+{
+	if (!dst && !src && n == 0)
+		return (NULL);
+	if (dst < src)
+		dst = ft_memcpy(dst, src, n);
+	else
+	{
+		while (n > 0)
+		{
+			((unsigned char *)dst)[n - 1] = ((unsigned char *)src)[n - 1];
+			n--;
+		}
+	}
+	return (dst);
+}
+
+#endif
 
 /*	//TEST CASES
 #include <string.h>
@@ -71,10 +94,16 @@ void	test(size_t len)
 		ft_memmove(string3, nullptr, len);
 		printf("Does nothing.\n");
 	}
-	printf("Destination and source strings are both NULL\n"); // NO CRASH on macOS
-	memmove(nullptr, nullptr, len);
-	ft_memmove(nullptr, nullptr, len);
-	printf("Does nothing.\n");
+#if !defined(__arm__)
+	if (len == 0)
+#endif
+	{
+		printf("Destination and source strings are both NULL\n");
+		// NO CRASH on ARM, CRASH on x86 when len > 0
+		memmove(nullptr, nullptr, len);
+		ft_memmove(nullptr, nullptr, len);
+		printf("Does nothing.\n");
+	}
 }
 
 int	main(void)

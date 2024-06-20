@@ -6,7 +6,7 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 23:30:00 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/06/18 23:41:21 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/06/20 21:00:42 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_putendl_fd(char *s, int fd)
 {
 	ssize_t	bytes_written;
 	size_t	strlen;
-	
+
 	strlen = ft_strlen(s);
 	bytes_written = write(fd, s, strlen);
 	while (bytes_written != -1 && (size_t)bytes_written < strlen)

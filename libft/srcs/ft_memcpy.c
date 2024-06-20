@@ -6,11 +6,13 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:52:30 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/06/16 18:02:09 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:18:40 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+#if defined(__arm__)
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
@@ -26,6 +28,25 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	}
 	return (dst);
 }
+
+#else
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	size_t	idx;
+
+	idx = 0;
+	if (!dst && !src && n == 0)
+		return (NULL);
+	while (idx < n)
+	{
+		((unsigned char *)dst)[idx] = ((unsigned char *)src)[idx];
+		idx++;
+	}
+	return (dst);
+}
+
+#endif
 
 /*	//TEST CASES
 #include <string.h>
@@ -56,18 +77,24 @@ void	test(size_t len)
 	if (len == 0)
 	{
 		printf("Destination string is NULL\n"); // CRASH when len > 0
-		memmove(nullptr, string3, len);
-		ft_memmove(nullptr, string3, len);
+		memcpy(nullptr, string3, len);
+		ft_memcpy(nullptr, string3, len);
 		printf("Does nothing.\n");
 		printf("Source string is NULL\n"); // CRASH when len > 0
-		memmove(string3, nullptr, len);
-		ft_memmove(string3, nullptr, len);
+		memcpy(string3, nullptr, len);
+		ft_memcpy(string3, nullptr, len);
 		printf("Does nothing.\n");
 	}
-	printf("Destination and source strings are both NULL\n"); // NO CRASH on ARM
-	memmove(nullptr, nullptr, len);
-	ft_memmove(nullptr, nullptr, len);
-	printf("Does nothing.\n");
+#if !defined(__arm__)
+	if (len == 0)
+#endif
+	{
+		printf("Destination and source strings are both NULL\n");
+		// NO CRASH on ARM, CRASH on x86 when len > 0
+		memcpy(nullptr, nullptr, len);
+		ft_memcpy(nullptr, nullptr, len);
+		printf("Does nothing.\n");
+	}
 }
 
 int	main(void)
