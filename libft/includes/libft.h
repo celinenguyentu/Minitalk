@@ -6,16 +6,21 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 09:50:24 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/06/18 22:05:45 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/06/25 03:57:35 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# if defined(__APPLE__)
+#  define APPLE_OR_AARCH64
+# elif defined(__aarch64__)
+#  define APPLE_OR_AARCH64
+# endif
+
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -69,8 +74,5 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-// ft_printf
-int		ft_printf(const char *format, ...);
-int		ft_vprintf(const char *format, va_list ap);
 
 #endif

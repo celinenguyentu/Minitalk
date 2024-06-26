@@ -6,13 +6,13 @@
 /*   By: cnguyen- <cnguyen-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:52:30 by cnguyen-          #+#    #+#             */
-/*   Updated: 2024/06/20 18:18:40 by cnguyen-         ###   ########.fr       */
+/*   Updated: 2024/06/25 04:21:21 by cnguyen-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#if defined(__arm__)
+#if defined(APPLE_OR_AARCH64)
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
@@ -85,12 +85,12 @@ void	test(size_t len)
 		ft_memcpy(string3, nullptr, len);
 		printf("Does nothing.\n");
 	}
-#if !defined(__arm__)
+#if !defined(__APPLE__) && !defined(__aarch64__)
 	if (len == 0)
 #endif
 	{
 		printf("Destination and source strings are both NULL\n");
-		// NO CRASH on ARM, CRASH on x86 when len > 0
+		// NO CRASH on macOS and ARM, CRASH on x86 when len > 0
 		memcpy(nullptr, nullptr, len);
 		ft_memcpy(nullptr, nullptr, len);
 		printf("Does nothing.\n");
